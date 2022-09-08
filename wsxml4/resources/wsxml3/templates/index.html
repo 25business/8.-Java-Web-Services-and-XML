@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMDB API Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css" integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" integrity="sha512-hasIneQUHlh06VNBe7f6ZcHmeRTLIaQWFd43YriJ0UND19bvYRauxthDg8E4eVNPm9bRUhr5JGeqH7FRFXQu5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+    <main>
+        <h1 id="api_title">TMBD API</h1>
+        <p>Version: <b>v1</b></p>
+        <p>Licence: <b>MIT</b></p>
+
+        <h3>Navigation</h3>
+        <nav id="tree_nav">
+            <ul>
+                <li><a href="#status_codes">HTTP Status codes</a></li>
+                <li><b>Methods</b></li>
+                <li><a href="#method_all_movies">All movies</a></li>
+                <li><a href="#method_single_movie">Single movie</a></li>
+                <li><a href="#method_search_movies">Search movies</a></li>
+                <li><b>Object reference</b></li>
+                <li><a href="#object_pagination">Pagination</a></li>
+                <li><a href="#object_movie">Movie</a></li>
+            </ul>
+        </nav>
+
+        <h2 id="status_codes">Status codes</h2>
+
+        <h2>Methods</h2>
+        <h3 id="method_all_movies">All movies</h3>
+        <a class="back_to_top" href="#tree_nav">
+            <i class="fa-solid fa-square-caret-up"></i> 
+            Back to navigation
+        </a>
+        <p>Fetches all movies, with pagination cap of 25 records per page.</p>
+        <p class="api_path_container">Path: <code class="api_path">/api/v1/movies</code></p>
+
+        <p><b>Response</b></p>
+        <pre><code class="language-json">{
+    status: 200,
+    pagination: { ... },
+    movies: [
+        { ... }
+    ]
+}</code></pre>
+        <p>For "pagination" object check <a href="#object_pagination">Pagination reference</a>.</p>
+        <p>For "movies" check <a href="#object_movie">Movie reference</a>.</p>
+
+
+        <p><b>Query parameters</b></p>
+        <table class="param_table">
+            <tr class="param_header">
+                <td>Parameter</td>
+                <td>Type</td>
+                <td>Description</td>
+            </tr>
+            <tr class="param_row">
+                <td>page</td>
+                <td>int</td>
+                <td>Represents a page of records list.</td>
+            </tr>
+        </table>
+
+        <div class="testing_area">
+            <h3>Run test</h3>
+            <p>Page (optional): <input id="page_all_movies" type="number" min="1"></p>
+            <p><button class="test_button" id="test_all_movies">Test</button></p>
+        </div>    
+        <!-- END ALL MOVIES Documentation  -->
+
+
+        <h3 id="method_single_movie">Single Movie</h3>
+        <a class="back_to_top" href="#tree_nav">
+            <i class="fa-solid fa-square-caret-up"></i> 
+            Back to navigation
+        </a>
+        <p>Fetches single movie result.</p>
+        <p class="api_path_container">Path: <code class="api_path">/api/v1/movies/&lt;movie_id&gt;</code></p>
+
+        <p><b>Path parameters</b></p>
+        <table class="param_table">
+            <tr class="param_header">
+                <td>Parameter</td>
+                <td>Type</td>
+                <td>Description</td>
+            </tr>
+            <tr class="param_row">
+                <td>movie_id</td>
+                <td>int</td>
+                <td>Represents ID for a movie located in TMDB.</td>
+            </tr>
+        </table>
+
+        <p><b>Response</b></p>
+        <pre><code class="language-json">{
+    status: 200,
+    movie: { ... }
+}</code></pre>
+        <p>For "movie" check <a href="#object_movie">Movie reference</a>.</p>
+
+        <h3 id="method_search_movies">Search movies</h3>
+        <a class="back_to_top" href="#tree_nav">
+            <i class="fa-solid fa-square-caret-up"></i> 
+            Back to navigation
+        </a>
+        <p>Searches movies for various criteria. See the table for query parameters.</p>
+        <p class="api_path_container">Path: <code class="api_path">/api/v1/movies/search</code></p>
+    
+        <p><b>Query parameters</b></p>
+        <table class="param_table">
+            <tr class="param_header">
+                <td>Parameter</td>
+                <td>Type</td>
+                <td>Description</td>
+            </tr>
+            <tr class="param_row">
+                <td>genre</td>
+                <td>string / string[]</td>
+                <td>Search movies for a genre or multiple genres.
+                    For multiple genres each genre must be divided by <b>_</b>
+                    (underscore).
+                </td>
+            </tr>
+            <tr class="param_row">
+                <td>page</td>
+                <td>int</td>
+                <td>Represents a page of records list.</td>
+            </tr>
+            <tr class="param_row">
+                <td>release_year</td>
+                <td>int</td>
+                <td>Search movies which were released by certain year.</td>
+            </tr>
+            <tr class="param_row">
+                <td>vote_min</td>
+                <td>float</td>
+                <td>Minimal vote value for movie's rating. <i>Includes the value.</i></td>
+            </tr>
+            <tr class="param_row">
+                <td>vote_max</td>
+                <td>float</td>
+                <td>Maximum vote value for movie's rating. <i>Includes the value.</i></td>
+            </tr>
+        </table>
+
+        <p><b>Response</b></p>
+        <pre><code class="language-json">{
+    status: 200,
+    pagination: { ... },
+    movies: [
+        { ... }
+    ]
+}</code></pre>
+        <p>For "pagination" object check <a href="#object_pagination">Pagination reference</a>.</p>
+        <p>For "movies" check <a href="#object_movie">Movie reference</a>.</p>
+
+
+
+        <h2>Object reference</h2>
+        <h3 id="object_pagination">Pagination</h3>
+        <a class="back_to_top" href="#tree_nav">
+            <i class="fa-solid fa-square-caret-up"></i> 
+            Back to navigation
+        </a>
+        <pre><code class="language-json">{
+    "page": <i>1</i>,
+    "records": <i>25</i>,
+    "pages": <i>10</i>,
+    "total": <i>247</i>
+}</code></pre>
+
+
+    <h3 id="object_movie">Movie</h3>
+    <a class="back_to_top" href="#tree_nav">
+        <i class="fa-solid fa-square-caret-up"></i> 
+        Back to navigation
+    </a>
+    <pre><code class="language">{
+    "id": <i>399566</i>,
+    "budget": <i>200000000</i>,
+    "genres": <i>[
+        "Action",
+        "Science Fiction"
+    ],</i>
+    "original_language": <i>"English"</i>,
+    "overview": <i>"In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages."</i>,
+    "popularity": <i>10755.513</i>,
+    "poster_path": <i>"/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg"</i>,
+    "release_date": <i>"2021-03-24"</i>,
+    "revenue": <i>298573106</i>,
+    "runtime": <i>113</i>,
+    "title": <i>"Godzilla vs. Kong"</i>,
+    "vote_average": <i>8.4</i>,
+    "vote_count": <i>4108</i> 
+}</code></pre>
+    
+    </main>
+
+    <!-- Modal za rezultate -->
+    <div class="modal_results">
+        <div class="modal">
+            <p><b>Path:</b> <span id="modal_path"></span></p>
+            <pre><code class="language-json" id="modal_response"></code></pre>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        hljs.highlightAll();
+
+        const button_test_all_mv = document.querySelector("#test_all_movies")
+        const input_page_all_mv = document.querySelector("#page_all_movies")
+        const span_modal_path = document.querySelector("#modal_path")
+        const code_modal_response = document.querySelector("#modal_response");
+        const div_modal_results = document.querySelector(".modal_results")
+    
+        button_test_all_mv.addEventListener("click", () => {
+            let query_url = "http://127.0.0.1:9000/api/v1/movies"
+            if(input_page_all_mv.value != "") {
+                query_url += "?page=" + input_page_all_mv.value
+            }
+            const xhr = new XMLHttpRequest()
+            xhr.open("GET", query_url)
+            xhr.send()
+            xhr.addEventListener("load", () => {
+                if(xhr.status == 200 && xhr.readyState == 4) {
+                    code_modal_response.innerHTML = xhr.responseText
+                    span_modal_path.innerHTML = query_url
+                    div_modal_results.style.display = "block"
+                }
+            })
+        })
+    </script>
+</body>
+</html>

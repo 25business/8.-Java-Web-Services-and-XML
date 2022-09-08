@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu+Mono&display=swap');
+
+* {
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+a { text-decoration: none; }
+
+body { background-color: #f7f7f7; }
+
+main {
+    width: calc(100vw - 2rem);
+    padding: 1rem;
+    padding-bottom: 5rem;
+    min-height: calc(100vh - 20px - 6rem);
+    max-width: 1320px;
+    margin: 10px auto;
+    background-color: white;
+}
+
+pre, code {
+    font-family: "Ubuntu Mono", monospace;
+}
+
+.api_path_container {
+    background-color: #f7f7f7;
+    padding: 0.3125rem;
+}
+.api_path { 
+    vertical-align: text-top;
+    color: rgb(26, 63, 142); 
+    font-weight: bold;
+ }
+
+.back_to_top {
+    padding: 0.5rem;
+    background-color: #e9e9e9;
+    color: rgb(204, 76, 12);
+    border-radius: 0.3125rem;
+}
+
+.modal_results {
+    display: none;
+    background-color: rgba(0,0,0,0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.modal {
+    background-color: white;
+    padding: 1.5rem;
+    width: 75%;
+    margin: 50px auto;
+}
+
+.param_table {
+    border: 1px solid darkblue;
+    padding: 0.5rem;
+    border-collapse: collapse;
+}
+.param_table td { padding: 0.4rem; }
+.param_header { background-color: rgb(30, 48, 120); }
+.param_header * { color: white; font-weight: bold; }
+.param_row:nth-child(odd) { background-color: #cfeaf6; }
+
+.testing_area {
+    margin: 0.5rem 0 0.75rem 0;
+    padding: 0.5rem;
+    background-color: rgb(255, 255, 205);
+}
+
+.test_button {
+    background-color: #424242;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.85);
+}
+
+#api_title {
+    font-size: 2.5rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(185, 185, 185, 0.5);
+}
