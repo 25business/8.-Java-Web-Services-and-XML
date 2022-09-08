@@ -1,0 +1,33 @@
+.AnimeDetails {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    position: relative;
+}
+
+.AnimeDetails h1 {
+    margin: 0.25rem 0 0.5rem 0;
+}
+
+.AnimeDetails h2 {
+    margin: 0 0 0.75rem 0;
+}
+
+.CloseDetails {
+    border: none;
+    background: none;
+    outline: none;
+    color: darkred;
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.NavbarLine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    text-align: right;
+}

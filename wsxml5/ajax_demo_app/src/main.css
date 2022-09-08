@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+    font-family: "Noto Sans JP", "Noto Sans", sans-serif;
+}
+
+.AjaxApp {
+    width: 100%;
+    width: 1320px;
+    margin: 0 auto;
+}
+
+.PromoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
